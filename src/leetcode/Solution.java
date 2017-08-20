@@ -109,6 +109,19 @@ class Solution {
         return sum;
     }
 
+    /* Integer to Roman
+     * Given an integer, convert it to a roman numeral.
+     * Input is guaranteed to be within the range from 1 to 3999.
+     */
+    static String intToRoman(int num) {
+        String[] I = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
+        String[] X = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
+        String[] C = {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
+        String[] M = {"", "M", "MM", "MMM"};
+        if (num <= 0) return null;
+        return M[num/1000] + C[(num%1000)/100] + X[(num%100)/10] + I[num%10];
+    }
+
     /* Longest Common Prefix
      * Write a function to find the longest common prefix string amongst an array of strings.
      */
