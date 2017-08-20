@@ -258,20 +258,21 @@ class Solution {
      * from nums2. The number of elements initialized in nums1 and nums2 are m and n respectively.
      */
     static void merge(int[] nums1, int m, int[] nums2, int n) {
-        int[] result = new int[m + n];
-        for(int i = 0; i < n; i++) {
-            if(nums1.length > 0) result[i] = nums1[i];
-            if(nums2.length > 0) result[i + n] = nums2[i];
+        int i = m - 1;
+        int j = n - 1;
+        for (int k = m + n - 1; k >= 0; k--) {
+            if (i < 0)                    nums1[k] = nums2[j--];
+            else if (j < 0)               nums1[k] = nums1[i--];
+            else if (nums1[i] < nums2[j]) nums1[k] = nums2[j--];
+            else                          nums1[k] = nums1[i--];
         }
-        Arrays.sort(result);
-        nums1 = result;
         StdOut.println(Arrays.toString(nums1));
     }
 
     public static void main(String[] args) {
         int[] a = {0};
         int[] b = {1};
-        int m = 1;
+        int m = 0;
         int n = 1;
         merge(a,m,b,n);
     }
