@@ -48,4 +48,19 @@ class Solution {
         }
         return 0;
     }
+
+    // Determine whether an integer is a palindrome. Do this without extra space.
+    static boolean isPalindrome(int x) {
+        long tmp = (long)x;
+        if (tmp < 0) return false;
+        else if (tmp > (long)Integer.MAX_VALUE) return false;
+        else {
+            String x_str = Integer.toString(x);
+            int N = x_str.length();
+            for (int i = 0; i < N/2; i++)
+                if (x_str.charAt(i) != x_str.charAt(N-1-i))
+                    return false;
+            return true;
+        }
+    }
 }
