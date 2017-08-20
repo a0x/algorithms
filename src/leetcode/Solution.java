@@ -1,5 +1,7 @@
 package leetcode;
 
+import java.util.Arrays;
+
 class Solution {
 
     /* Two Sum
@@ -104,5 +106,43 @@ class Solution {
         }
         sum += nums[nums.length-1];
         return sum;
+    }
+
+    /* Longest Common Prefix
+     * Write a function to find the longest common prefix string amongst an array of strings.
+     */
+    static String longestCommonPrefix(String[] strs) {
+        if (strs.length == 0 ) return "";
+        if (strs.length == 1) return strs[0];
+
+        String commonString = new String();
+
+        // Find out the min length in strs
+        int[] tmp = new int[strs.length];
+        for (int i = 0; i < strs.length; i++){
+            tmp[i] = strs[i].length();
+        }
+        Arrays.sort(tmp);
+        int min_str_length = tmp[0];
+        String[] prefix_ary = new String[strs.length];
+
+        for (int i = 0; i < min_str_length; i++) {
+            // Fill in prefix_ary once per letter, the length of it is exactly the length of strs
+            for (int j = 0; j < strs.length; j++) {
+                prefix_ary[j] = strs[j].substring(0, i+1);
+            }
+            // If prefix_ary is all the same, pick up one into commonString, then goes to another round
+            if (sameString(prefix_ary)) commonString = prefix_ary[0];
+        }
+        return commonString;
+    }
+
+     private static boolean sameString(String[] strs) {
+        if (strs.length < 2) return false;
+        boolean flag = true;
+        for (int i = 0; i < strs.length; i++) {
+            if (!strs[0].equals(strs[i])) flag = false;
+        }
+        return flag;
     }
 }
