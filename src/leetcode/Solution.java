@@ -29,4 +29,23 @@ class Solution {
         }
         return ary_index;
     }
+
+    /* Reverse Integer
+     * Example1: x = 123, return 321
+     * Example2: x = -123, return -321
+     * The input is assumed to be a 32-bit signed integer. Your function should return 0 when the reversed integer overflows.
+     */
+    static int reverse(int x) {
+        if (x < 10 && x > -10) return x;
+        long lx = (long)x;
+        if (lx > (long)Integer.MIN_VALUE && lx < (long)Integer.MAX_VALUE) {
+            StringBuilder str = new StringBuilder(Integer.toString(Math.abs(x)));
+            StringBuilder y = str.reverse();
+            if (x < 0) y.insert(0, '-');
+            long ly = Long.parseLong(y.toString());
+            if (ly > (long)Integer.MIN_VALUE && ly < (long)Integer.MAX_VALUE)
+                return Integer.parseInt(y.toString());
+        }
+        return 0;
+    }
 }
