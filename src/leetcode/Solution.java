@@ -414,36 +414,26 @@ class Solution {
      *
      * 2) Recursive approach is not recommend either, since you will have to handle overflow cases, such as 9 + 1 = 10,
      * 99 + 1 = 100. If still running recursively, there could be a memory out or time limit exceeded.
+     *
+     * 3) Actually there's no need to use recursive approach. In normal condition, just digits[i]++ and return,
+     * otherwise digits[i] = 0 and run another loop, till i reach 0. It can be recursively, and it can be much easier
+     * instead.
      */
     static int[] plusOne(int[] digits) {
-        int[] result = recursivePlus(digits);
-        if (result[0] == 0) {
-            int[] new_digits = new int[result.length + 1];
-            new_digits[0] = 1;
-            return new_digits;
-        } else
-            return result;
+        int length = digits.length;
+        for (int i = length - 1; i >= 0; i--) {
+            if (digits[i] < 9) {
+                digits[i]++;
+                return digits;
+            }
+            digits[i] = 0;
+        }
+        int[] plus = new int[length+ 1];
+        plus[0] = 1;
+        return plus;
     }
 
-    static int[] recursivePlus(int[] digits) {
-        int plus = 1;
-        for(int i = digits.length - 1; i >= 0; i--) {
-            int last = digits[i] + plus;
-            if (last < 10) {
-                digits[i] = last;
-                plus = 0;
-            } else {
-                digits[i] = 0;
-                recursivePlus(Arrays.copyOfRange(digits, 0, i));
-            }
-        }
-        return digits;
-    }
 
     public static void main(String[] args) {
-        int[] a = {9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9};
-        int[] b = plusOne(a);
-        for(int i = 0; i < b.length; i++)
-            StdOut.print(b[i]);
     }
 }
