@@ -382,7 +382,7 @@ class Solution {
             // well as A[i], since this is product, a negative * negative could be positive.
             int temp = max;
             max = Math.max(Math.max(max * nums[i], min * nums[i]), nums[i]);
-            min = Math.max(Math.max(temp * nums[i], min * nums[i]), nums[i]);
+            min = Math.min(Math.min(temp * nums[i], min * nums[i]), nums[i]);
             result = Math.max(max, result);
         }
         return result;
@@ -475,5 +475,7 @@ class Solution {
 
 
     public static void main(String[] args) {
+        int[] a = {-2, 3, -4};
+        StdOut.println(maxProduct(a));
     }
 }
