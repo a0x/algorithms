@@ -345,6 +345,25 @@ class Solution {
         return curr.toString();
     }
 
+    /* Maximum Sum of Subarray
+     * Find the contiguous subarray within an array (containing at least one number) which has the largest sum.
+     * For example, given the array [-2,1,-3,4,-1,2,1,-5,4],
+     * the contiguous subarray [4,-1,2,1] has the largest sum = 6.
+     *
+     * As the original description, I first thought it is to find the exact subarray which has the max sum in all.
+     * And follow that thought, I can't figure out how to find it following the algorithm which can get AC.
+     * So, I went though the examples, and found it should find the max SUM of subarraies, in whatever condition.
+     * As result, it want the max sum, not the subarray itself, and things become much easier.
+     */
+    static int maxSubArray(int[] nums) {
+        int maxSoFar = nums[0], maxEndingHere = nums[0];
+        for (int i = 1; i < nums.length; i++){
+            maxEndingHere = Math.max(maxEndingHere + nums[i], nums[i]);
+            maxSoFar = Math.max(maxEndingHere, maxSoFar);
+        }
+        return maxSoFar;
+    }
+
     public static void main(String[] args) {
     }
 }
