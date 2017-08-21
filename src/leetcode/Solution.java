@@ -433,6 +433,46 @@ class Solution {
         return plus;
     }
 
+    /* Add Binary
+     * Given two binary strings, return their sum (also a binary string).
+     * For example,
+     * a = "11"
+     * b = "1"
+     * Return "100"
+     */
+    static String addBinary(String a, String b) {
+        StringBuilder result = new StringBuilder();
+        int plus = 0;
+        int length = Math.max(a.length(), b.length());
+        String binary_a = leftZero(a, length);
+        String binary_b = leftZero(b, length);
+        for(int i = length; i > 0; i--) {
+            int sum = Integer.parseInt(binary_a.substring(i-1,i)) + Integer.parseInt(binary_b.substring(i-1,i)) + plus;
+            if (sum <= 1) {
+                result.insert(0, sum);
+                plus = 0;
+            }
+            else if (sum == 2) {
+                result.insert(0, 0);
+                plus = 1;
+            } else {
+                result.insert(0, 1);
+                plus = 1;
+            }
+        }
+        if (plus == 1) result.insert(0, 1);
+        return result.toString();
+    }
+
+    private static String leftZero(String str, int length) {
+        if (str.length() >= length) return str;
+        int value = length - str.length();
+        StringBuilder result = new StringBuilder(str);
+        for(int i = 0; i < value; i++)
+            result.insert(0, 0);
+        return result.toString();
+    }
+
 
     public static void main(String[] args) {
     }
