@@ -495,9 +495,17 @@ class Solution {
         return (int)r;
     }
 
+    /* Sum of Square Numbers
+     * Given a non-negative integer c, your task is to decide whether there're two integers a and b such that a2 + b2 = c.
+     */
+    static boolean judgeSquareSum(int c) {
+        for(long a = 0; a * a <= c; a++) {
+            double b = Math.sqrt(c - a * a);
+            if (b == (int)b) return true;
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
-        int a = 985;
-        StdOut.println(mySqrt(a));
-        StdOut.println(sqrt_newton(a));
     }
 }
