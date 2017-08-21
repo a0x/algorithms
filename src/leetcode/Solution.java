@@ -317,12 +317,12 @@ class Solution {
      * Output: "1211"
      */
     static String countAndSay(int n) {
-        // curr is the default string, which starts from n = 1
+        // curr is the default string, which starts from n = 0 in original description
         StringBuilder curr = new StringBuilder("1");
         StringBuilder prev;
         int count;
         char say;
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n - 1; i++) {
             // In every loop, prev is given the value of last curr
             prev = curr;
             // And there always will be the new empty curr
