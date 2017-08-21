@@ -2,9 +2,7 @@ package leetcode;
 
 import edu.princeton.cs.algs4.StdOut;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Stack;
 
 class Solution {
@@ -473,9 +471,33 @@ class Solution {
         return result.toString();
     }
 
+    /* Sqrt(x)
+     * Implement int sqrt(int x).
+     * Compute and return the square root of x.
+     */
+    static int mySqrt(int x) {
+        if (x == 0) return 0;
+        int left = 1, right = Integer.MAX_VALUE;
+        while (true) {
+            int mid = left + (right - left) / 2;
+            if (mid > x/mid) right = mid - 1;
+            else {
+                if (mid + 1 > x / (mid + 1)) return mid;
+                left = mid + 1;
+            }
+        }
+    }
+
+    static int sqrt_newton(int x) {
+        long r = x;
+        while (r * r > x)
+            r = (r + x / r) / 2;
+        return (int)r;
+    }
 
     public static void main(String[] args) {
-        int[] a = {-2, 3, -4};
-        StdOut.println(maxProduct(a));
+        int a = 985;
+        StdOut.println(mySqrt(a));
+        StdOut.println(sqrt_newton(a));
     }
 }
