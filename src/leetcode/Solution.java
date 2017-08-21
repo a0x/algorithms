@@ -289,6 +289,62 @@ class Solution {
         return low;
     }
 
+    /* Count and Say
+     * The count-and-say sequence is the sequence of integers with the first five terms as following:
+     *  1.     1
+     *  2.     11
+     *  3.     21
+     *  4.     1211
+     *  5.     111221
+     *  6.     312211
+     *  7.     13112221
+     *  8.     1113213211
+     *  9.     31131211131221
+     * 10.     13211311123113112211
+     *
+     * 1 is read off as "one 1" or 11.
+     * 11 is read off as "two 1s" or 21.
+     * 21 is read off as "one 2, then one 1" or 1211.
+     * Given an integer n, generate the nth term of the count-and-say sequence.
+     * Note: Each term of the sequence of integers will be represented as a string.
+     *
+     * Example 1:
+     * Input: 1
+     * Output: "1"
+     *
+     * Example 2:
+     * Input: 4
+     * Output: "1211"
+     */
+    static String countAndSay(int n) {
+        // curr is the default string, which starts from n = 1
+        StringBuilder curr = new StringBuilder("1");
+        StringBuilder prev;
+        int count;
+        char say;
+        for (int i = 0; i < n; i++) {
+            // In every loop, prev is given the value of last curr
+            prev = curr;
+            // And there always will be the new empty curr
+            curr = new StringBuilder();
+            // count, the number of each single elem in prev, default is 1
+            count = 1;
+            // say, starts from the first elem in prev
+            say = prev.charAt(0);
+
+            // Now let's loop the prev string, count and say it into curr
+            for (int j = 1, len = prev.length(); j < len; j++) {
+                if (prev.charAt(j) != say) {
+                    curr.append(count).append(say);
+                    count = 1;
+                    say = prev.charAt(j);
+                } else count++;
+            }
+            curr.append(count).append(say);
+        }
+        return curr.toString();
+    }
+
     public static void main(String[] args) {
     }
 }
