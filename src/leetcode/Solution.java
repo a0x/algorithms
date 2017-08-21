@@ -345,7 +345,7 @@ class Solution {
         return curr.toString();
     }
 
-    /* Maximum Sum of Subarray
+    /* Maximum Sum of Subarray [DP]
      * Find the contiguous subarray within an array (containing at least one number) which has the largest sum.
      * For example, given the array [-2,1,-3,4,-1,2,1,-5,4],
      * the contiguous subarray [4,-1,2,1] has the largest sum = 6.
@@ -362,6 +362,30 @@ class Solution {
             maxSoFar = Math.max(maxEndingHere, maxSoFar);
         }
         return maxSoFar;
+    }
+
+    /* Maximum Product of Subarray [DP]
+     * Find the contiguous subarray within an array (containing at least one number) which has the largest product.
+     * For example, given the array [2,3,-2,4],
+     * the contiguous subarray [2,3] has the largest product = 6.
+     *
+     * In this case, which is different from the former one, product can be negative as min value, and on the opposite
+     * positive as max value if it multiply another negative one.
+     * So we have to deal with min value and max value at the same time, to find out the true max value.
+     */
+    static int maxProduct(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+        int max = nums[0], min = nums[0], result = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            // Loop through the array, each time remember the max and min value for the previous product, the most
+            // important thing is to update the max and min value: we have to compare among max * A[i], min * A[i] as
+            // well as A[i], since this is product, a negative * negative could be positive.
+            int temp = max;
+            max = Math.max(Math.max(max * nums[i], min * nums[i]), nums[i]);
+            min = Math.max(Math.max(temp * nums[i], min * nums[i]), nums[i]);
+            result = Math.max(max, result);
+        }
+        return result;
     }
 
     public static void main(String[] args) {
