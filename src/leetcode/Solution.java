@@ -403,6 +403,47 @@ class Solution {
         }
     }
 
+    /* Plus One
+     * Given a non-negative integer represented as a non-empty array of digits, plus one to the integer.
+     * You may assume the integer do not contain any leading zero, except the number 0 itself.
+     * The digits are stored such that the most significant digit is at the head of the list.
+     *
+     * Note:
+     * 1) This problem cannot be solved by using the tricky approach, which is pasting array of digits into any
+     * types of number, including int, long, etc. Because it will cause java.lang.NumberFormatException in some cases.
+     *
+     * 2) Recursive approach is not recommend either, since you will have to handle overflow cases, such as 9 + 1 = 10,
+     * 99 + 1 = 100. If still running recursively, there could be a memory out or time limit exceeded.
+     */
+    static int[] plusOne(int[] digits) {
+        int[] result = recursivePlus(digits);
+        if (result[0] == 0) {
+            int[] new_digits = new int[result.length + 1];
+            new_digits[0] = 1;
+            return new_digits;
+        } else
+            return result;
+    }
+
+    static int[] recursivePlus(int[] digits) {
+        int plus = 1;
+        for(int i = digits.length - 1; i >= 0; i--) {
+            int last = digits[i] + plus;
+            if (last < 10) {
+                digits[i] = last;
+                plus = 0;
+            } else {
+                digits[i] = 0;
+                recursivePlus(Arrays.copyOfRange(digits, 0, i));
+            }
+        }
+        return digits;
+    }
+
     public static void main(String[] args) {
+        int[] a = {9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9};
+        int[] b = plusOne(a);
+        for(int i = 0; i < b.length; i++)
+            StdOut.print(b[i]);
     }
 }
