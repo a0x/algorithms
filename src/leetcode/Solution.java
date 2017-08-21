@@ -388,6 +388,21 @@ class Solution {
         return result;
     }
 
+    /* Length of Last Word
+     * Given a string s consists of upper/lower-case alphabets and empty space characters ' ', return the length of last
+     * word in the string.
+     * If the last word does not exist, return 0.
+     */
+    static int lengthOfLastWord(String s) {
+        if (s.length() == 0) return 0;
+        String[] split = s.split(" ");
+        if (split.length > 0) {
+            return split[split.length - 1].length();
+        } else {
+            return 0;
+        }
+    }
+
     public static void main(String[] args) {
     }
 }
